@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
-import { execute, OP_CODES, Operation, Script } from '../../engine/engine'
+import { OpCode } from '../../bitcoin-script/language-definition';
+import { execute, Operation, Script } from '../../engine/engine'
 
 @Component({
   selector: 'page-page1',
@@ -14,9 +15,9 @@ export class Page1 {
 
     let operations = new Script();
 
-    operations.push(Operation.create(OP_CODES.OP_1));
-    operations.push(Operation.create(OP_CODES.OP_2));
-    operations.push(Operation.create(OP_CODES.OP_ADD));
+    operations.push(Operation.create(OpCode.OP_1));
+    operations.push(Operation.create(OpCode.OP_2));
+    operations.push(Operation.create(OpCode.OP_ADD));
 
     let a = execute(operations);
     console.log(a.next());

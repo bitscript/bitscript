@@ -1,6 +1,6 @@
 import {
   pushData
-} from './operations'
+} from './operations/pushdata'
 
 // from https://github.com/btcsuite/btcd/blob/master/txscript/opcode.go
 export enum OpCode {
