@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
-import { execute, OP_CODES, Operation } from '../../engine/engine'
+import { execute, OP_CODES, Operation, Script } from '../../engine/engine'
 
 @Component({
   selector: 'page-page1',
@@ -12,7 +12,7 @@ export class Page1 {
 
   constructor(public navCtrl: NavController) {
 
-    let operations = [];
+    let operations = new Script();
 
     operations.push(Operation.create(OP_CODES.OP_1));
     operations.push(Operation.create(OP_CODES.OP_2));

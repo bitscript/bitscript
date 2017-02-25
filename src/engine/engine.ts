@@ -4,9 +4,7 @@ export enum OP_CODES {
     OP_ADD
 }
 
-export class Script {
-    operations: Operation;
-}
+export class Script extends Array<Operation> {}
 
 export class Operation {
     code: OP_CODES;
@@ -22,7 +20,8 @@ export class Operation {
     }
 }
 
-function* executeGenerator(operations: Operation[]) {
+function* executeGenerator(operations: Script) {
+
   let stack = [];
   while(operations.length > 0) {
     let operation = operations.pop();
@@ -33,6 +32,6 @@ function* executeGenerator(operations: Operation[]) {
   }
 }
 
-export function execute(operations: Operation[]) {
+export function execute(operations: Script) {
     return executeGenerator(operations);
 }
