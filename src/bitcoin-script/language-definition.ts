@@ -1,6 +1,6 @@
 import {
   pushData
-} from 'operations'
+} from './operations'
 
 // from https://github.com/btcsuite/btcd/blob/master/txscript/opcode.go
 export enum OpCode {
@@ -270,7 +270,6 @@ export interface OpCodeDefinition {
   name: string,
   codepoint: number,
   description: string,
-  consumes: number,
   operation: Function
 }
 
@@ -280,6 +279,5 @@ OpCodes[OpCode.OP_0] = {
     name: 'OP_0',
     codepoint: OpCode.OP_0,
     description: '',
-    consumes: 0,
     operation: pushData
 }
