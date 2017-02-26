@@ -1,10 +1,5 @@
 import { OpCode } from '../language-definition'
 
-// TODO: placeholder for Stack object
-export interface Stack {
-  placeholder: string[]
-}
-
 // An ExecutionState should describe all aspects of the script
 // execution at an point in time.
 export interface ExecutionState {
@@ -13,19 +8,25 @@ export interface ExecutionState {
   blockTime: number,
 
   // transaction state
-  script: string[], // TODO
+  script: Uint8Array,
   nLockTime: number,
   nSequence: number,
 
   // execution state
-  stack: Stack,
-  altstack: Stack,
+  stack: any[],
+  altstack: any[],
   currentExecutionPoint: number,
   lastCodeSeperator: number,
 
   // exception handling
-  unimplementedOpCode: OpCode,
-  invalidOpCode: OpCode
+  exception?: ExecutionException,
+  exceptionOpCode?: OpCode
+}
+
+export enum ExecutionException {
+  Unimplemented = 0,
+  Invalid = 1,
+  Disabled = 2
 }
 
 // All bitcoin script operations take a single ExecutionState

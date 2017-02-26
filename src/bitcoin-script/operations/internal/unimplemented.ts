@@ -1,6 +1,11 @@
-import { BitcoinScriptOperation, ExecutionState } from '../types'
+import { BitcoinScriptOperation, ExecutionState, ExecutionException } from '../types'
+import { OpCode } from '../../language-definition'
 
-export const unimplemented: BitcoinScriptOperation = function (state: ExecutionState) {
-  throw new Error('Not implemented')
-  // return state
+export function unimplemented (code: OpCode) {
+  const unimplemented: BitcoinScriptOperation = (state: ExecutionState) => {
+    state.exception = ExecutionException.Unimplemented
+    state.exceptionOpCode = code
+    return state
+  }
+  return unimplemented
 }
