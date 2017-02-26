@@ -1,11 +1,18 @@
 import {
+
+	// internal
 	unimplemented,
 	unknown,
 	invalid,
+
+	// push
 	pushData,
 	pushNumber,
-	BitcoinScriptOperation,
-	BitcoinScriptOperationFactory,
+
+	// numeric
+	add,
+
+	BitcoinScriptOperation
 } from './operations/operations'
 
 // from https://github.com/btcsuite/btcd/blob/master/txscript/opcode.go
@@ -425,7 +432,7 @@ export function defineOpCodes () {
 	OpCodes[OpCode.OP_ABS] = { name: 'OP_ABS', codepoint: OpCode.OP_ABS, description: 'OP_ABS is not yet implemented.', operation: unimplemented(OpCode.OP_ABS) },
 	OpCodes[OpCode.OP_NOT] = { name: 'OP_NOT', codepoint: OpCode.OP_NOT, description: 'OP_NOT is not yet implemented.', operation: unimplemented(OpCode.OP_NOT) },
 	OpCodes[OpCode.OP_0NOTEQUAL] = { name: 'OP_0NOTEQUAL', codepoint: OpCode.OP_0NOTEQUAL, description: 'OP_0NOTEQUAL is not yet implemented.', operation: unimplemented(OpCode.OP_0NOTEQUAL) },
-	OpCodes[OpCode.OP_ADD] = { name: 'OP_ADD', codepoint: OpCode.OP_ADD, description: 'OP_ADD is not yet implemented.', operation: unimplemented(OpCode.OP_ADD) },
+	OpCodes[OpCode.OP_ADD] = { name: 'OP_ADD', codepoint: OpCode.OP_ADD, description: 'OP_ADD is not yet implemented.', operation: add },
 	OpCodes[OpCode.OP_SUB] = { name: 'OP_SUB', codepoint: OpCode.OP_SUB, description: 'OP_SUB is not yet implemented.', operation: unimplemented(OpCode.OP_SUB) },
 	OpCodes[OpCode.OP_MUL] = { name: 'OP_MUL', codepoint: OpCode.OP_MUL, description: 'OP_MUL is not yet implemented.', operation: unimplemented(OpCode.OP_MUL) },
 	OpCodes[OpCode.OP_DIV] = { name: 'OP_DIV', codepoint: OpCode.OP_DIV, description: 'OP_DIV is not yet implemented.', operation: unimplemented(OpCode.OP_DIV) },

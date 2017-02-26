@@ -1,8 +1,6 @@
-import { BitcoinScriptOperationFactory } from '../operations'
-import { ExecutionState, ExecutionException } from '../../engine'
-import { OpCode } from '../../language-definition'
+import { ExecutionState, ExecutionException, OpCode } from '../common'
 
-export const invalid: BitcoinScriptOperationFactory = (code: OpCode) => (state: ExecutionState) => {
+export const invalid = (code: OpCode) => (state: ExecutionState) => {
   state.exception = ExecutionException.Invalid
   state.exceptionOpCode = code
   return state

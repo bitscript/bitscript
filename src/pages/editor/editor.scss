@@ -1,0 +1,10 @@
+page-editor {
+  .editor-content {
+    background-color: #272822
+  }
+
+  // TODO: Ionic sets this to `scroll` by default for some reason. Why?
+  .scroll-content {
+    overflow-y: auto;
+  }
+}

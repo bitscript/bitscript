@@ -37,7 +37,6 @@ function* executeGenerator(state: ExecutionState) {
   while(currentState.serializedScript.length > currentState.programCounter) {
     const operation = currentState.serializedScript[currentState.programCounter]
     const opDefinition = OpCodes[operation]
-    console.log(operation)
     currentState = opDefinition.operation(currentState)
     yield copyState(currentState)
   }

@@ -5,10 +5,10 @@ import { NavController } from 'ionic-angular';
 import { execute, OpCode } from '../../bitcoin-script'
 
 @Component({
-  selector: 'page-page1',
-  templateUrl: 'page1.html'
+  selector: 'page-editor',
+  templateUrl: 'editor.html'
 })
-export class Page1 {
+export class Editor {
 
   constructor(public navCtrl: NavController) {
     const a = execute({
