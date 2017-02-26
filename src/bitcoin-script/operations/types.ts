@@ -26,7 +26,8 @@ export interface ExecutionState {
 export enum ExecutionException {
   Unimplemented = 0,
   Invalid = 1,
-  Disabled = 2
+  Disabled = 2,
+  Unknown = 3
 }
 
 // All bitcoin script operations take a single ExecutionState
