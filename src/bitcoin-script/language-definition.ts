@@ -275,6 +275,7 @@ export interface OpCodeDefinition {
   operation: BitcoinScriptOperation
 }
 
+// TODO: unit test – for each result item, codepoint === index
 export function defineOpCodes () {
 	const OpCodes: OpCodeDefinition[] = [
 		{ name: 'OP_0', codepoint: OpCode.OP_0, description: 'Push an empty array of bytes onto the stack.', operation: pushData(0) },
@@ -374,6 +375,7 @@ export function defineOpCodes () {
 		{ name: 'OP_14', codepoint: OpCode.OP_14, description: 'Push the number 14 to the stack.', operation: pushNumber(14) },
 		{ name: 'OP_15', codepoint: OpCode.OP_15, description: 'Push the number 15 to the stack.', operation: pushNumber(15) },
 		{ name: 'OP_16', codepoint: OpCode.OP_16, description: 'Push the number 16 to the stack.', operation: pushNumber(16) },
+		{ name: 'OP_NOP', codepoint: OpCode.OP_NOP, description: 'OP_NOP is not yet implemented.', operation: unimplemented(OpCode.OP_NOP) },
 		{ name: 'OP_IF', codepoint: OpCode.OP_IF, description: 'OP_IF is not yet implemented.', operation: unimplemented(OpCode.OP_IF) },
 		{ name: 'OP_NOTIF', codepoint: OpCode.OP_NOTIF, description: 'OP_NOTIF is not yet implemented.', operation: unimplemented(OpCode.OP_NOTIF) },
 		{ name: 'OP_VERIF', codepoint: OpCode.OP_VERIF, description: 'OP_VERIF is not yet implemented.', operation: unimplemented(OpCode.OP_VERIF) },
