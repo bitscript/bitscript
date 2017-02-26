@@ -1,4 +1,4 @@
-import { OpCode, OpCodes } from './language-definition';
+import { OpCode, defineOpCodes } from './language-definition';
 
 export enum ExecutionException {
   Unimplemented = 0,
@@ -33,6 +33,7 @@ export interface ExecutionState {
 function* executeGenerator(state: ExecutionState) {
   let stack = state.stack
   let altStack = state.altStack
+  const OpCodes = defineOpCodes()
   while(state.serializedScript.length > state.currentExecutionPoint) {
     const operation = state.serializedScript[state.currentExecutionPoint]
     const opDefinition = OpCodes[0]
