@@ -28,6 +28,7 @@ export class ScriptKeyboardCmp {
   id: number;
   mode: string;
   gestureBlocker: BlockerDelegate;
+  handleKeyPress: any;
 
   constructor(
     private _viewCtrl: ViewController,
@@ -56,6 +57,14 @@ export class ScriptKeyboardCmp {
     }
     if (this.d.subTitle) {
       this.descId = 'acst-subhdr-' + this.id;
+    }
+
+    this.handleKeyPress = params.data.handleKeyPress;
+  }
+
+  onButtonClick(opcode) {
+    if(this.handleKeyPress) {
+      this.handleKeyPress(opcode);
     }
   }
 
@@ -131,6 +140,10 @@ export class ScriptKeyboardCmp {
     if (shouldDismiss) {
       this.dismiss(button.role);
     }
+  }
+
+  click2(opcode) {
+    this.handleKeyPress(opcode)
   }
 
   bdClick() {

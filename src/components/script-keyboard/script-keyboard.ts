@@ -8,9 +8,10 @@ import { ViewController } from 'ionic-angular/navigation/view-controller';
 export class ScriptKeyboard extends ViewController {
   private _app: App;
 
-  constructor(app: App) {
+  constructor(app: App, private handleKeyPress) {
     super(ScriptKeyboardCmp, {
-      enableBackdropDismiss: true
+      enableBackdropDismiss: true,
+      handleKeyPress: handleKeyPress
     }, null);
     this._app = app;
     this.isOverlay = true;
@@ -33,8 +34,8 @@ export class ScriptKeyboardController {
 
   constructor(private _app: App) {}
 
-  create(): ScriptKeyboard {
-    return new ScriptKeyboard(this._app);
+  create(handleKeyPress): ScriptKeyboard {
+    return new ScriptKeyboard(this._app, handleKeyPress);
   }
 
 }

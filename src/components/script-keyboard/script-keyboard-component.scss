@@ -5,11 +5,11 @@ script-keyboard {
   bottom: 0;
   left: 0;
   right: 0;
+  top: 0;
   z-index: $z-index-overlay;
   display: block;
 
   width: $action-sheet-width;
-  height: 400px;
 }
 
 .script-keyboard-wrapper {
@@ -23,10 +23,9 @@ script-keyboard {
   margin: auto;
 
   width: $action-sheet-width;
+  height: 400px;
 
   transform: translate3d(0, 100%, 0);
-}
 
-.action-sheet-button {
-  width: $action-sheet-width;
+  background-color: aliceblue;
 }

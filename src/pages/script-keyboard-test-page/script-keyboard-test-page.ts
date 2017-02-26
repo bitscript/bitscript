@@ -13,12 +13,16 @@ export class ScriptKeyboardTestPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private scriptKeyboardController: ScriptKeyboardController) {
 
-    this.scriptKeyboard = scriptKeyboardController.create();
+    this.scriptKeyboard = scriptKeyboardController.create(this.handleKeyPress);
 
   }
 
   ionViewDidEnter() {
     this.scriptKeyboard.present();
+  }
+
+  handleKeyPress(opcode) {
+    console.log('key pressed', opcode)
   }
 
 }
