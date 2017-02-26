@@ -1,21 +1,8 @@
 <ion-backdrop (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>
-<div class="script-keyboard-wrapper">
-  <div>asd</div>
-  <div class="script-keyboard-container">
-    <div class="script-keyboard-group">
-      <div class="script-keyboard-title" id="{{hdrId}}" *ngIf="d.title">{{d.title}}</div>
-      <div class="script-keyboard-sub-title" id="{{descId}}" *ngIf="d.subTitle">{{d.subTitle}}</div>
-      <button ion-button="script-keyboard-button" (click)="click(b)" *ngFor="let b of d.buttons" class="disable-hover" [attr.icon-left]="b.icon ? '' : null" [ngClass]="b.cssClass">
-        <ion-icon [name]="b.icon" *ngIf="b.icon" class="script-keyboard-icon"></ion-icon>
-        {{b.text}}
-      </button>
+<div class="script-keyboard-wrapper" style="transform: translateY(0%)">
+  <div class="script-keyboard-sections">
+    <div class="script-keyboard-section">
 
-    </div>
-    <div class="script-keyboard-group" *ngIf="d.cancelButton">
-      <button ion-button="script-keyboard-button" (click)="click(d.cancelButton)" class="script-keyboard-cancel disable-hover" [attr.icon-left]="d.cancelButton.icon ? '' : null" [ngClass]="d.cancelButton.cssClass">
-        <ion-icon [name]="d.cancelButton.icon" *ngIf="d.cancelButton.icon" class="script-keyboard-icon"></ion-icon>
-        {{d.cancelButton.text}}
-      </button>
     </div>
   </div>
 </div>

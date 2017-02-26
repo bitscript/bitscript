@@ -9,8 +9,16 @@ export class ScriptKeyboard extends ViewController {
   private _app: App;
 
   constructor(app: App) {
-    super(ScriptKeyboardCmp, {}, null);
+    super(ScriptKeyboardCmp, {
+      enableBackdropDismiss: true
+    }, null);
     this._app = app;
+    this.isOverlay = true;
+  }
+
+  getTransitionName(direction: string) {
+    let key = 'scriptKeyboard' + (direction === 'back' ? 'Leave' : 'Enter');
+    return this._nav && this._nav.config.get(key);
   }
 
   present(navOptions: NavOptions = {}) {
