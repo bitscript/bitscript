@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
-import { OpCode } from '../../bitcoin-script/language-definition';
-import { execute, Operation, Script } from '../../engine/engine'
+import { execute, OpCode } from '../../bitcoin-script'
 
 @Component({
   selector: 'page-page1',
@@ -12,14 +11,21 @@ import { execute, Operation, Script } from '../../engine/engine'
 export class Page1 {
 
   constructor(public navCtrl: NavController) {
+    const a = execute({
+      // network state
+      blockHeight: 0,
+      blockTime: 0,
 
-    let operations = new Script();
+      // transaction state
+      serializedScript: new Uint8Array([OpCode.OP_2, OpCode.OP_3, OpCode.OP_ADD]),
+      nLockTime: 0,
+      nSequence: 0,
 
-    operations.push(Operation.create(OpCode.OP_1));
-    operations.push(Operation.create(OpCode.OP_2));
-    operations.push(Operation.create(OpCode.OP_ADD));
-
-    let a = execute(operations);
+      // execution state
+      stack: [],
+      altStack: [],
+      currentExecutionPoint: 0
+    });
     console.log(a.next());
     console.log(a.next());
     console.log(a.next());
