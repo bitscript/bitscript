@@ -1,14 +1,14 @@
 import {
 	unimplemented,
 	pushData,
+	pushNumber,
 	BitcoinScriptOperation,
 	BitcoinScriptOperationGenerator,
 } from './operations'
 
 // from https://github.com/btcsuite/btcd/blob/master/txscript/opcode.go
 export enum OpCode {
-  OP_0                   = 0x00, // 0
-	OP_FALSE               = 0x00, // 0 - AKA OP_0
+	OP_0                   = 0x00, // 0 - AKA OP_FALSE
 	OP_DATA_1              = 0x01, // 1
 	OP_DATA_2              = 0x02, // 2
 	OP_DATA_3              = 0x03, // 3
@@ -90,7 +90,6 @@ export enum OpCode {
 	OP_1NEGATE             = 0x4f, // 79
 	OP_RESERVED            = 0x50, // 80
 	OP_1                   = 0x51, // 81 - AKA OP_TRUE
-	OP_TRUE                = 0x51, // 81
 	OP_2                   = 0x52, // 82
 	OP_3                   = 0x53, // 83
 	OP_4                   = 0x54, // 84
@@ -186,9 +185,7 @@ export enum OpCode {
 	OP_CHECKMULTISIG       = 0xae, // 174
 	OP_CHECKMULTISIGVERIFY = 0xaf, // 175
 	OP_NOP1                = 0xb0, // 176
-	OP_NOP2                = 0xb1, // 177
 	OP_CHECKLOCKTIMEVERIFY = 0xb1, // 177 - AKA OP_NOP2
-	OP_NOP3                = 0xb2, // 178
 	OP_CHECKSEQUENCEVERIFY = 0xb2, // 178 - AKA OP_NOP3
 	OP_NOP4                = 0xb3, // 179
 	OP_NOP5                = 0xb4, // 180
@@ -277,7 +274,7 @@ export interface OpCodeDefinition {
 }
 
 export const OpCodes: OpCodeDefinition[] = [
-{ name: 'OP_FALSE', codepoint: OpCode.OP_FALSE, description: 'Push an empty array of bytes onto the stack.', operation: pushData(0) },
+{ name: 'OP_0', codepoint: OpCode.OP_0, description: 'Push an empty array of bytes onto the stack.', operation: pushData(0) },
 { name: 'OP_DATA_1', codepoint: OpCode.OP_DATA_1, description: 'Push the next byte onto the stack.', operation: pushData(1) },
 { name: 'OP_DATA_2', codepoint: OpCode.OP_DATA_2, description: 'Push the next 2 bytes onto the stack.', operation: pushData(2) },
 { name: 'OP_DATA_3', codepoint: OpCode.OP_DATA_3, description: 'Push the next 3 bytes onto the stack.', operation: pushData(3) },
@@ -358,24 +355,22 @@ export const OpCodes: OpCodeDefinition[] = [
 { name: 'OP_PUSHDATA4', codepoint: OpCode.OP_PUSHDATA4, description: 'OP_PUSHDATA4 is not yet implemented.', operation: unimplemented(OpCode.OP_PUSHDATA4) },
 { name: 'OP_1NEGATE', codepoint: OpCode.OP_1NEGATE, description: 'OP_1NEGATE is not yet implemented.', operation: unimplemented(OpCode.OP_1NEGATE) },
 { name: 'OP_RESERVED', codepoint: OpCode.OP_RESERVED, description: 'OP_RESERVED is not yet implemented.', operation: unimplemented(OpCode.OP_RESERVED) },
-{ name: 'OP_TRUE', codepoint: OpCode.OP_TRUE, description: 'OP_TRUE is not yet implemented.', operation: unimplemented(OpCode.OP_TRUE) },
-{ name: 'OP_2', codepoint: OpCode.OP_2, description: 'OP_2 is not yet implemented.', operation: unimplemented(OpCode.OP_2) },
-{ name: 'OP_3', codepoint: OpCode.OP_3, description: 'OP_3 is not yet implemented.', operation: unimplemented(OpCode.OP_3) },
-{ name: 'OP_4', codepoint: OpCode.OP_4, description: 'OP_4 is not yet implemented.', operation: unimplemented(OpCode.OP_4) },
-{ name: 'OP_5', codepoint: OpCode.OP_5, description: 'OP_5 is not yet implemented.', operation: unimplemented(OpCode.OP_5) },
-{ name: 'OP_6', codepoint: OpCode.OP_6, description: 'OP_6 is not yet implemented.', operation: unimplemented(OpCode.OP_6) },
-{ name: 'OP_7', codepoint: OpCode.OP_7, description: 'OP_7 is not yet implemented.', operation: unimplemented(OpCode.OP_7) },
-{ name: 'OP_8', codepoint: OpCode.OP_8, description: 'OP_8 is not yet implemented.', operation: unimplemented(OpCode.OP_8) },
-{ name: 'OP_9', codepoint: OpCode.OP_9, description: 'OP_9 is not yet implemented.', operation: unimplemented(OpCode.OP_9) },
-{ name: 'OP_10', codepoint: OpCode.OP_10, description: 'OP_10 is not yet implemented.', operation: unimplemented(OpCode.OP_10) },
-{ name: 'OP_11', codepoint: OpCode.OP_11, description: 'OP_11 is not yet implemented.', operation: unimplemented(OpCode.OP_11) },
-{ name: 'OP_12', codepoint: OpCode.OP_12, description: 'OP_12 is not yet implemented.', operation: unimplemented(OpCode.OP_12) },
-{ name: 'OP_13', codepoint: OpCode.OP_13, description: 'OP_13 is not yet implemented.', operation: unimplemented(OpCode.OP_13) },
-{ name: 'OP_14', codepoint: OpCode.OP_14, description: 'OP_14 is not yet implemented.', operation: unimplemented(OpCode.OP_14) },
-{ name: 'OP_15', codepoint: OpCode.OP_15, description: 'OP_15 is not yet implemented.', operation: unimplemented(OpCode.OP_15) },
-{ name: 'OP_16', codepoint: OpCode.OP_16, description: 'OP_16 is not yet implemented.', operation: unimplemented(OpCode.OP_16) },
-{ name: 'OP_NOP', codepoint: OpCode.OP_NOP, description: 'OP_NOP is not yet implemented.', operation: unimplemented(OpCode.OP_NOP) },
-{ name: 'OP_VER', codepoint: OpCode.OP_VER, description: 'OP_VER is not yet implemented.', operation: unimplemented(OpCode.OP_VER) },
+{ name: 'OP_1', codepoint: OpCode.OP_1, description: 'Push the number 1 to the stack.', operation: pushNumber(1) },
+{ name: 'OP_2', codepoint: OpCode.OP_2, description: 'Push the number 2 to the stack.', operation: pushNumber(2) },
+{ name: 'OP_3', codepoint: OpCode.OP_3, description: 'Push the number 3 to the stack.', operation: pushNumber(3) },
+{ name: 'OP_4', codepoint: OpCode.OP_4, description: 'Push the number 4 to the stack.', operation: pushNumber(4) },
+{ name: 'OP_5', codepoint: OpCode.OP_5, description: 'Push the number 5 to the stack.', operation: pushNumber(5) },
+{ name: 'OP_6', codepoint: OpCode.OP_6, description: 'Push the number 6 to the stack.', operation: pushNumber(6) },
+{ name: 'OP_7', codepoint: OpCode.OP_7, description: 'Push the number 7 to the stack.', operation: pushNumber(7) },
+{ name: 'OP_8', codepoint: OpCode.OP_8, description: 'Push the number 8 to the stack.', operation: pushNumber(8) },
+{ name: 'OP_9', codepoint: OpCode.OP_9, description: 'Push the number 9 to the stack.', operation: pushNumber(9) },
+{ name: 'OP_10', codepoint: OpCode.OP_10, description: 'Push the number 10 to the stack.', operation: pushNumber(10) },
+{ name: 'OP_11', codepoint: OpCode.OP_11, description: 'Push the number 11 to the stack.', operation: pushNumber(11) },
+{ name: 'OP_12', codepoint: OpCode.OP_12, description: 'Push the number 12 to the stack.', operation: pushNumber(12) },
+{ name: 'OP_13', codepoint: OpCode.OP_13, description: 'Push the number 13 to the stack.', operation: pushNumber(13) },
+{ name: 'OP_14', codepoint: OpCode.OP_14, description: 'Push the number 14 to the stack.', operation: pushNumber(14) },
+{ name: 'OP_15', codepoint: OpCode.OP_15, description: 'Push the number 15 to the stack.', operation: pushNumber(15) },
+{ name: 'OP_16', codepoint: OpCode.OP_16, description: 'Push the number 16 to the stack.', operation: pushNumber(16) },
 { name: 'OP_IF', codepoint: OpCode.OP_IF, description: 'OP_IF is not yet implemented.', operation: unimplemented(OpCode.OP_IF) },
 { name: 'OP_NOTIF', codepoint: OpCode.OP_NOTIF, description: 'OP_NOTIF is not yet implemented.', operation: unimplemented(OpCode.OP_NOTIF) },
 { name: 'OP_VERIF', codepoint: OpCode.OP_VERIF, description: 'OP_VERIF is not yet implemented.', operation: unimplemented(OpCode.OP_VERIF) },
@@ -534,15 +529,3 @@ export const OpCodes: OpCodeDefinition[] = [
 { name: 'OP_PUBKEY', codepoint: OpCode.OP_PUBKEY, description: 'OP_PUBKEY is not yet implemented.', operation: unimplemented(OpCode.OP_PUBKEY) },
 { name: 'OP_INVALIDOPCODE', codepoint: OpCode.OP_INVALIDOPCODE, description: 'OP_INVALIDOPCODE is not yet implemented.', operation: unimplemented(OpCode.OP_INVALIDOPCODE) }
 ]
-
-
-
-// export const OpCodes: OpCodeDefinition[] = [
-// 	{
-//     name: 'OP_0',
-//     codepoint: OpCode.OP_0,
-//     description: 'Not yet implemented.',
-//     operation: unimplemented
-// 	}
-// ]
-
