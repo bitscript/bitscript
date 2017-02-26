@@ -1,10 +1,11 @@
 import { BitcoinScriptOperationFactory } from '../operations'
-import { ExecutionState, ExecutionException } from '../../engine'
-import { OpCode } from '../../language-definition'
+import { ExecutionState, copyState } from '../../engine'
 
 export const pushNumber: BitcoinScriptOperationFactory = (value: number) => (state: ExecutionState) => {
-  state.serializedScript[state.currentExecutionPoint]
-  state.exception = ExecutionException.Unimplemented
-  state.exceptionOpCode = OpCode[OpCode[value + 80]]
-  return state
+  console.log('made it')
+  const nextState = copyState(state)
+  nextState.stack.push(value);
+  nextState.programCounter++;
+  console.log(state)
+  return nextState
 }

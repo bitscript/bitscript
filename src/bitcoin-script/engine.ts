@@ -22,7 +22,7 @@ export interface ExecutionState {
   // execution state
   stack: any[]
   altStack: any[]
-  currentExecutionPoint: number
+  programCounter: number
   lastCodeSeperator?: number // if not set, should be treated as 0
 
   // exception handling
@@ -30,14 +30,16 @@ export interface ExecutionState {
   exceptionOpCode?: OpCode
 }
 
+// A convenient Generator API, because JavaScript
 function* executeGenerator(state: ExecutionState) {
-  let stack = state.stack
-  let altStack = state.altStack
   const OpCodes = defineOpCodes()
-  while(state.serializedScript.length > state.currentExecutionPoint) {
-    const operation = state.serializedScript[state.currentExecutionPoint]
-    const opDefinition = OpCodes[0]
-    yield opDefinition.operation(state)
+  let currentState = state
+  while(currentState.serializedScript.length > currentState.programCounter) {
+    const operation = currentState.serializedScript[currentState.programCounter]
+    const opDefinition = OpCodes[operation]
+    console.log(operation)
+    currentState = opDefinition.operation(currentState)
+    yield copyState(currentState)
   }
 }
 
@@ -45,3 +47,25 @@ export function execute(operations: ExecutionState) {
     return executeGenerator(operations)
 }
 
+// return a copy of the provided state
+export function copyState(state: ExecutionState) {
+  return {
+    blockHeight: state.blockHeight,
+    blockTime: state.blockTime,
+
+    // transaction state
+    serializedScript: state.serializedScript,
+    nLockTime: state.nLockTime,
+    nSequence: state.nSequence,
+
+    // execution state
+    stack: state.stack,
+    altStack: state.altStack,
+    programCounter: state.programCounter,
+    lastCodeSeperator: state.lastCodeSeperator, // if not set, should be treated as 0
+
+    // exception handling
+    exception: state.exception,
+    exceptionOpCode: state.exceptionOpCode
+  }
+}
