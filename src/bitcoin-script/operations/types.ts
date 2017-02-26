@@ -32,5 +32,9 @@ export enum ExecutionException {
 // All bitcoin script operations take a single ExecutionState
 // and return an ExecutionState.
 export interface BitcoinScriptOperation {
-    (state: ExecutionState): ExecutionState
+  (state: ExecutionState): ExecutionState
+}
+
+export interface BitcoinScriptOperationGenerator {
+  (input: any): BitcoinScriptOperation
 }
