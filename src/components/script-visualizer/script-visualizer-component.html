@@ -1,1 +1,19 @@
-<div>Visualizer</div>
+<div class="script-visualizer">
+  <ion-list>
+    <div class="insertion-handle">
+      <button ion-button round outline color="light" icon-only>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </div>
+    <div *ngFor="let op of operationList">
+      <div ion-item class="script-visualizer-operation">
+        {{op.operation}}
+      </div>
+      <div class="insertion-handle">
+        <button ion-button round outline color="light" icon-only>
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </ion-list>
+</div>
